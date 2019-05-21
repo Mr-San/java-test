@@ -1,5 +1,7 @@
 # java-test
 
+[TOC]
+
 ## 一、Java异常处理
 
 ### 1、Java异常分类
@@ -230,3 +232,134 @@ javadoc -encoding utf8 -sourcepath src/main/java -d api/ -subpackages com.san
 
 Q：private级别上的才需要进行注释？
 A：都需要注释，但只有public级别的注释才会在生成API Docs中展现
+
+## 三、Java命名规范
+
+### 1、基本原则
+
+- 见名知义
+- 通俗易懂
+- 避免歧义
+- 简洁省力
+
+### 2、经典命名方法
+
+1、驼峰命名法
+
+- 大驼峰：UpperCamelCase，Camel
+- 小驼峰：lowerCamelCase，camel
+
+2、匈牙利命名法
+
+- 系统匈牙利命名法
+    - 类型前缀 + 大驼峰，如lAccountNum表示长整数变量
+- 匈牙利应用命名法
+    - 目的前缀 + 大驼峰，如usName表示非安全字符串
+
+连接：https://zh.wikipedia.org/wiki/匈牙利命名法
+
+3、下划线命名法
+
+单词小写，以下划线连接
+
+### 3、命名内容
+
+1、GAV（GroupID、ArtifactID、Version）
+
+- 简单：com.公司名.应用名.模块名
+- 高级：com.{公司/BU }.业务线 [.子业务线]，最多4级
+
+2、项目名：单个名词
+
+3、模块名：应用名-模块名
+
+3、包名：全小写
+
+- 一级包名常见的有：com/cn/org/net，二级包名以公司或个人来命名，三级包名根据应用进行命名，四级包名为模块名或层级名。
+- 四级及四级以上包名根据应用架构自行定义，有人喜欢先分功能模块，再分架构模块，而有些人恰好相反。
+
+常见功能模块：
+- controller
+- action
+- service
+- dao
+- bean
+- db
+- util
+
+4、类名：大驼峰
+
+- 对象实体：名词，如FileInputStream、BufferedImage
+- 功能性：形容词，如Searilizeable
+- 动词：XxxxAction
+
+注1：动作应该封装在实体对象中，能力可以封装在接口中
+注2：抽象类前缀Abstract、接口实现类Impl后缀
+
+5、方法名 / 函数名：小驼峰，动词开头
+
+注：常见特殊的约定俗称用法：
+- 情态动词(can/should/need/will)+动词，如“canDelete, canEnter, shouldDie, needDecode, willRain”
+- 系词(is)+名词，如“isCard, isVip, isBoss, isMonster”
+- 系词(is)+形容词，如“isBeautiful, isVestmented, isRunning”
+
+6、变量名：小驼峰，类型前缀/后缀 + 单复数
+
+- 基本类型：类型缩写前缀，如intA、shtB、byeC
+- 引用类型：类型或类型缩写后缀，如confirmButton、confirmBtn
+
+注1：接口变量名为接口名
+
+注2：基本类型缩写如下：
+
+![Java基本类型缩写](C:\Users\IOYU\Evernote\Databases\Attachments\ceda0a272328f15a864a41345f073e3c.png.backup)
+
+注3：计算机编程常用缩写见《Java常用缩写》
+
+7、常量名：大写单词组合，以下划线（_）进行组合
+
+### 4、命名重点
+
+- 动词 vs 名词
+- 单数 vs 复数
+- 类型
+- 缩写
+
+### 5、参考
+
+- https://blog.csdn.net/zhu_xun/article/details/19912411
+- https://www.ibm.com/developerworks/cn/java/deconding-code-specification-part-1/index.html
+
+## 四、Java常用缩写
+
+### 1、基本原则
+
+- 尽量不使用缩写，除非是约定俗成的缩写，如Internationalization缩写成I18N
+- 词组过长，影响代码简洁度，可使用缩写
+
+### 2、基本要点
+
+- 见名知义
+- 通俗易懂
+- 避免歧义
+- 简洁省力
+
+### 3、如何使用缩写
+
+1、常用缩写集锦
+
+参考
+- 常用缩写：https://blog.csdn.net/elegant__/article/details/9748835
+- 缩写词查询：https://www.abbreviations.com
+
+2、自定义缩写
+
+- 优先使用代码中已存在的缩写或缩写规则，保持一致性
+- 单个单词取前4个字母，多个单词取词组首字母小写（可读性很差，一般用于方法体内部）
+
+### 4、Q&A
+
+Q：大小写区分？
+A：
+     缩写都需要全大写或全小写，如TCP（Transmission Control Protocol）作为前缀时全小写，作为后缀时全大写，在中间时首字母大写（大驼峰）
+
