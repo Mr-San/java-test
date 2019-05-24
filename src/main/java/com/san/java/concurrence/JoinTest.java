@@ -1,0 +1,60 @@
+package com.san.java.concurrence;
+
+/**
+ * Created by San on 2019/5/30.
+ * join在synchronized中，可能会造成死锁
+ */
+public class JoinTest {
+    private Print print = new Print();
+
+    private class Print {
+        public void print(String msg) {
+            System.out.println(msg);
+        }
+    }
+
+    private class ThreadA extends Thread {
+        @Override
+        public void run() {
+            synchronized (print) {
+                print.print(Thread.currentThread() + " run ThreadA");
+            }
+        }
+    }
+
+    private class ThreadB extends Thread {
+        private ThreadA a;
+
+        public ThreadB(ThreadA a) {
+            this.a = a;
+        }
+
+        @Override
+        public void run() {
+            synchronized (print) {
+                print.print(Thread.currentThread() + " run ThreadB pre ...");
+
+                try {
+                    // 当前线程调用另一个线程的Thread.join方法，导致当前线程进入阻塞状态；当另一个线程执行完成后当前线程再继续执行
+                    a.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                print.print(Thread.currentThread() + " run ThreadB");
+            }
+        }
+    }
+
+    public void test() {
+        ThreadA a = new ThreadA();
+        ThreadB b = new ThreadB(a);
+        b.start();
+        a.start();
+    }
+
+    public static void main(String[] args) {
+        JoinTest example = new JoinTest();
+        example.test();
+    }
+}
